@@ -8,6 +8,7 @@ try:
 except ImportError:
     pass
 
+print("Self-defined textrank loaded.")
 default_tfidf = TFIDF()
 default_textrank = TextRank()
 default_textrank_similarity = TextRankSimilarity()
