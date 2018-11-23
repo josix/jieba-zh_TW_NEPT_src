@@ -66,7 +66,7 @@ class TextRankVSM(KeywordExtractor):
         return (wp.flag in self.pos_filt and len(wp.word.strip()) >= 2
                 and wp.word.lower() not in self.stop_words)
 
-    def textrank(self, sentence, topK=20, withWeight=False, allowPOS=('ns', 'n', 'vn', 'v'), withFlag=False, vsm=None):
+    def textrank(self, sentence, topK=20, withWeight=False, allowPOS=('ns', 'n', 'vn', 'v'), withFlag=False, vsm=None, oov_idf=0):
         """
         Extract keywords from sentence using TextRank algorithm.
         Parameter:
@@ -95,8 +95,8 @@ class TextRankVSM(KeywordExtractor):
                         if not vsm:
                             cm[(wp.word, words[j].word)] += 1
                         else:
-                            word_first_idf = vsm.idf_[vsm.vocabulary_[wp.word]] if wp.word in vsm.vocabulary_ else 1
-                            word_context_idf = vsm.idf_[vsm.vocabulary_[words[j].word]] if words[j].word in vsm.vocabulary_ else 1
+                            word_first_idf = vsm.idf_[vsm.vocabulary_[wp.word]] if wp.word in vsm.vocabulary_ else oov_idf
+                            word_context_idf = vsm.idf_[vsm.vocabulary_[words[j].word]] if words[j].word in vsm.vocabulary_ else oov_idf
                             cm[(wp.word, words[j].word)] += word_first_idf * word_context_idf + word_first_idf
 
         for terms, w in cm.items():
