@@ -66,7 +66,7 @@ class TextRankVSM(KeywordExtractor):
         return (wp.flag in self.pos_filt and len(wp.word.strip()) >= 2
                 and wp.word.lower() not in self.stop_words)
 
-    def textrank(self, sentence, topK=20, withWeight=False, allowPOS=('ns', 'n', 'vn', 'v'), withFlag=False, vsm=None, oov_idf=0):
+    def textrank(self, sentence, topK=20, withWeight=False, allowPOS=('ns', 'n', 'vn', 'v'), withFlag=False, vsm=None, oov_idf=0.00000001):
         """
         Extract keywords from sentence using TextRank algorithm.
         Parameter:
