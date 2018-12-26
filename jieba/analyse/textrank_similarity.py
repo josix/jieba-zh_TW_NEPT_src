@@ -32,7 +32,7 @@ class UndirectWeightedGraph:
 
         # this line for build stable iteration
         sorted_keys = sorted(self.graph.keys())
-        for x in xrange(10):  # 10 iters
+        for x in xrange(300):  # 10 iters
             for n in sorted_keys:
                 s = 0
                 for e in self.graph[n]:
@@ -60,7 +60,7 @@ class TextRankSimilarity(KeywordExtractor):
         self.tokenizer = self.postokenizer = jieba.posseg.dt
         self.stop_words = self.STOP_WORDS.copy()
         self.pos_filt = frozenset(('ns', 'n', 'vn', 'v'))
-        self.span = 5
+        self.span = 3
 
     def pairfilter(self, wp):
         return (wp.flag in self.pos_filt and len(wp.word.strip()) >= 2
